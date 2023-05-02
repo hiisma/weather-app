@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import keys from '../config'
+import keys from '../config'          // Import API keys  from config.js
 import axios from 'axios'
 
 const search = ref('Barcelona')
@@ -10,6 +10,10 @@ const country = ref('Spain')
 const temperature = ref('25')
 const weather = ref('Sunny')
 
+/**
+ * Get weather from API and updates values
+ * and color of the temperature circle.
+ */
 const getWeather = async () => {
   const instance = axios.create({
     baseURL: keys.api.weather.url,
@@ -39,6 +43,10 @@ const getWeather = async () => {
     })
 }
 
+/**
+ * Updates the color of the temperature circle
+ * depending on the temperature.
+ */
 const updateColor = async () => {
   const color_green = '#B5FFA4'
   const color_blue = '#A4F0FF'
@@ -56,6 +64,10 @@ const updateColor = async () => {
   }
 }
 
+/**
+ * Changes the city to search for.
+ * @param {*} event
+ */
 const changeCity = (event) => {
   search.value = event.target.value
   getWeather()
